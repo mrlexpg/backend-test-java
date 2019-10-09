@@ -44,8 +44,23 @@ Passo 1: Antes de executar, e necessario entrar na pasta do projeto (asnpark) e 
 Passo 2: Nao havendo problema no passo anterior, executar a aplicacao usando,
          Comando : mvn spring-boot run 
 
+Passo 3: Para executar os testes diretamente na linha de comando, realizar as seguintes operacoes:
 
-Passo 3: Para consultar as persistencias dos dados no H2, utilizar o console atraves da url : http://localhost:8080/h2-console
+		# Executar todas as unit test classes.
+		$ mvn test
+		
+		# Executar uma unica classe teste.
+		$ mvn -Dtest=EstabelecimentoControllerTest test
+		$ mvn -Dtest=VeiculoControllerTest test
+		$ mvn -Dtest=EntradaSaidaVeiculoControllerTest test
+		
+		# Executar multiplas classes.
+		$ mvn -Dtest=EstabelecimentoControllerTest,EntradaSaidaVeiculoControllerTest test
+		
+		# Run a single test method from a test class.
+		$ mvn -Dtest=EntradaSaidaVeiculoControllerTest#save_emptyEstabelecimento_400 test
+
+Passo 4: Para consultar as persistencias dos dados no H2, utilizar o console atraves da url : http://localhost:8080/h2-console
          Para logar no console , utilizar o usuario e a senha configurado no application.properties:
          
          User Name: sa

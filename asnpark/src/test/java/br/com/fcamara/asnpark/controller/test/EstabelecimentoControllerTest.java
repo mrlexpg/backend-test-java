@@ -20,6 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -41,14 +42,12 @@ public class EstabelecimentoControllerTest {
 	 private EstabelecimentoRepository mockRepository;
 	
 	@Test
+	@WithMockUser(username="fcadm",roles={"USER","ADMIN"})
 	public void save_emptyEstabelecimento_400() throws Exception {
 
         String empresaInJson = "{\"cnpj\": \"11111111111111\"}";
 
         mockMvc.perform(post("/estabelecimento")
-        		.contentType(MediaType.APPLICATION_FORM_URLENCODED)
-        		.param("username", "fcadm")
-        		.param("password", "fcamara")
                 .content(empresaInJson)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
                 .andDo(print())
